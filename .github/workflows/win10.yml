@@ -15,7 +15,7 @@ jobs:
       - name: Start Ngrok and show RDP address
         shell: powershell
         run: |
-          Start-Process ngrok "tcp 3389" -WindowStyle Hidden
+          Start-Process ngrok "tcp 3389 --region=eu" -WindowStyle Hidden
           Start-Sleep -Seconds 10
           $response = Invoke-RestMethod http://127.0.0.1:4040/api/tunnels
           $tcp = $response.tunnels | Where-Object { $_.proto -eq "tcp" }
