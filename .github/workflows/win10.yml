@@ -8,12 +8,12 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Start Ngrok and Show RDP Address
-      shell: powershell
-      run: |
-        Start-Process ngrok "tcp 3389" -WindowStyle Hidden
-        Start-Sleep -Seconds 10
-        $response = Invoke-RestMethod http://127.0.0.1:4040/api/tunnels
-        $tcp = $response.tunnels | Where-Object {$_.proto -eq "tcp"}
-        Write-Host "🔗 Your RDP address:"
-        Write-Host $tcp.public_url
-        Start-Sleep -Seconds 21600  # 6 Stunden offen halten
+  shell: powershell
+  run: |
+    Start-Process ngrok "tcp 3389" -WindowStyle Hidden
+    Start-Sleep -Seconds 10
+    $response = Invoke-RestMethod http://127.0.0.1:4040/api/tunnels
+    $tcp = $response.tunnels | Where-Object {$_.proto -eq "tcp"}
+    Write-Host "Your RDP address:"
+    Write-Host $tcp.public_url
+    Start-Sleep -Seconds 21600  # Keep the machine alive for 6 hours
